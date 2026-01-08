@@ -11,6 +11,29 @@ public static class ArraySelector
 
     private static int[] ListSelector(int[] list1, int[] list2, int[] select)
     {
-        return [];
+        // My Solution Plan -> Create a result array with size equal to selector array.
+        // Step 1: Use the pointers/indices for each of the two input arrays.
+        // Step 2: Loop through the selector array, and based on each value (1 or 2),
+        // Step 3: Add the next element from the corresponding array and advance its pointer.
+        
+        int[] result = new int[select.Length];
+        int index1 = 0; // Pointer for list1
+        int index2 = 0; // Pointer for list2
+        
+        for (int i = 0; i < select.Length; i++)
+        {
+            if (select[i] == 1)
+            {
+                result[i] = list1[index1];
+                index1++;
+            }
+            else if (select[i] == 2)
+            {
+                result[i] = list2[index2];
+                index2++;
+            }
+        }
+        
+        return result;
     }
 }

@@ -19,6 +19,13 @@ public static class Divisors {
     private static List<int> FindDivisors(int number) {
         List<int> results = new();
         // TODO problem 1
+        for (int i = 1; i < number; i++) {
+            if (number % i == 0) {
+                results.Add(i);
+            }
+        }
         return results;
     }
 }
+
+/// Note for me: The solution finds all divisors including 1 but excluding the number itself, handling both regular numbers (like 12: {1, 2, 3, 4, 6}) and prime numbers like 17: {1})
