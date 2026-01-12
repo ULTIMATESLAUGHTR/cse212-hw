@@ -42,14 +42,21 @@ public static class Arrays
         // be implemented by another person.
 
         //My Step by Step Plan to work out this RotateListRight function will be -
-        //Step 1: First, determine the length of the list using data.Count and store it in a variable called length. Example: int length = data.Count;
-        //Step 2: Next, create a new list to hold the rotated values. Example: List<int> rotated = new List<int>(new int[length]);
+
+
+        //Step 1: First, get the "length" variable of the list using data.Count and store it in a variable called "length". Example: int length = data.Count;
+        //Step 2: Afterwards, create a new list to hold the rotated values and create the "rotated" variable. Example: List<int> rotated = new List<int>(new int[length]);
         //Step 3: Use a "for loop" to iterate through each index of the original list. Example: for (int i = 0; i < length; i++)
-        //Step 4: Inside the loop, calculate the new index for each element after rotation. The new index can be calculated as (i + amount) % length.
+        //Step 4: Inside the loop, calculate the new index for each element after rotation. I'm using the (%) modulo operation to accomplish this. The new index can be calculated like this --->>> (i + amount) % length.
         //Step 5: Assign the value from the original list to the new index in the rotated list. Example: rotated[newIndex] = data[i];
-        //Step 6: After the loop, copy the values from the rotated list back to the original list to modify it in place. Example: for (int i = 0; i < length; i++) { data[i] = rotated[i]; }
+        //Step 6: After the loop, copy the values from the rotated list back to the original list to modify it in place. Example: for (int i = 0; i < length; i++) and then on the next bracket write - { data[i] = rotated[i]; }. This will ensure the original list is updated with the rotated values and you're done!
+        
         int length = data.Count;
-        List<int> rotated = new List<int>(new int[length]);
+        List<int> rotated = new List<int>();
+        for (int i = 0; i < length; i++)
+        {
+            rotated.Add(0); // Initialize with default values so that the list won't throw an error when assigning values.
+        }
         for (int i = 0; i < length; i++)
         {
             int newIndex = (i + amount) % length;
