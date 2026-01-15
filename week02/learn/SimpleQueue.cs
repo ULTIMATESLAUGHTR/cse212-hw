@@ -67,7 +67,7 @@
             throw new IndexOutOfRangeException();
 
         var value = _queue[1];
-        _queue.RemoveAt(1);
+        _queue.RemoveAt(0);
         return value;
     }
 }
