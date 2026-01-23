@@ -15,6 +15,15 @@
     /// <returns>true if all letters are unique, otherwise false</returns>
     private static bool AreUniqueLetters(string text) {
         // TODO Problem 1 - Replace the O(n^2) algorithm to use sets and O(n) efficiency
+        // How can we write this with O(n) performance using a set?
+        // A HashSet is a data structure that stores unique items and has O(1) average performance for both 
+        // checking if an item exists (Contains) and adding new items (Add). Unlike our nested loops which 
+        // compare each letter to every other letter (O(n^2)), we can iterate through the string once and 
+        // track which letters we've already seen. As we loop through each letter, we first check if it's 
+        // already in the set (fast operation). If it is, we found a duplicate and return false. If it's not,
+        // we add it to the set. Since we only loop through the string once and each lookup/add is constant 
+        // time, the overall performance becomes O(n). This is much better than comparing every letter to 
+        // every other letter which will solve the problem efficiently even for longer strings.
         for (var i = 0; i < text.Length; ++i) {
             for (var j = 0; j < text.Length; ++j) {
                 // Don't want to compare to yourself ... that will always result in a match

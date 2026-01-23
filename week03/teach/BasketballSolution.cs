@@ -46,3 +46,16 @@ public class BasketballSolution
         }
     }
 }
+
+//Copying the results from running the solution which is to create a Dictionary to accumulate points per player:
+// The top 10 players with the highest career points are:
+//1. abdulka01 (Abdul Jabbar) - 38,387 points
+//2. malonka01 (Karl Malone) - 36,928 points
+//3. jordami01 (Michael Jordan) - 32,292 points
+//4. chambwi01 (Wilt Chamberlain) - 31,419 points
+//5. ervinju01 (Julius Erving) - 30,026 points
+//6. malonmo01 (Moses Malone) - 29,580 points
+//7. bryanko01 (Kobe Bryant) - 29,484 points
+//8. onealsh01 (Shaquille O'Neal) - 28,596 points
+//9. isselda01 (Dan Issel) - 27,482 points
+//10. hayesel01 (Elgin Baylor) - 27,313 points
