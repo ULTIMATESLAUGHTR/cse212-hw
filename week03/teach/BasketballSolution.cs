@@ -49,6 +49,7 @@ public class BasketballSolution
 
 //Copying the results from running the solution which is to create a Dictionary to accumulate points per player:
 // The top 10 players with the highest career points are:
+
 //1. abdulka01 (Abdul Jabbar) - 38,387 points
 //2. malonka01 (Karl Malone) - 36,928 points
 //3. jordami01 (Michael Jordan) - 32,292 points

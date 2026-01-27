@@ -21,8 +21,39 @@ public static class SetsAndMaps
     /// <param name="words">An array of 2-character words (lowercase, no duplicates)</param>
     public static string[] FindPairs(string[] words)
     {
-        // TODO Problem 1 - ADD YOUR CODE HERE
-        return [];
+        // To find symmetric pairs in O(n) time using a set: create a set of all words, then for each word,
+        // reverse it and check if the reversed version exists in the set. If it does and it's different from
+        // the original word, we found a pair. Use a set to track which pairs we've already found to avoid
+        // adding duplicates (since both "ab" and "ba" would find each other). Skip words with identical characters.
+        var wordSet = new HashSet<string>(words);
+        var pairs = new List<string>();
+        var seenPairs = new HashSet<string>();
+
+        foreach (var word in words)
+        {
+            // Skip if both characters are the same (special case)
+            if (word[0] == word[1])
+                continue;
+
+            // Reverse the word to find its symmetric pair
+            var reversed = new string([word[1], word[0]]);
+
+            // Check if the reversed word exists in our set
+            if (wordSet.Contains(reversed))
+            {
+                // Create a canonical pair string to avoid duplicates
+                var pair = word[0] < reversed[0] ? $"{reversed} & {word}" : $"{word} & {reversed}";
+                
+                // Only add if we haven't seen this pair before
+                if (!seenPairs.Contains(pair))
+                {
+                    pairs.Add(pair);
+                    seenPairs.Add(pair);
+                }
+            }
+        }
+
+        return pairs.ToArray();
     }
 
     /// <summary>
@@ -42,7 +73,16 @@ public static class SetsAndMaps
         foreach (var line in File.ReadLines(filename))
         {
             var fields = line.Split(",");
-            // TODO Problem 2 - ADD YOUR CODE HERE
+            // Extract the degree from column 4 (index 3) and count occurrences
+            var degree = fields[3].Trim();
+            if (degrees.ContainsKey(degree))
+            {
+                degrees[degree]++;
+            }
+            else
+            {
+                degrees[degree] = 1;
+            }
         }
 
         return degrees;
@@ -66,8 +106,37 @@ public static class SetsAndMaps
     /// </summary>
     public static bool IsAnagram(string word1, string word2)
     {
-        // TODO Problem 3 - ADD YOUR CODE HERE
-        return false;
+        // Remove spaces and convert to lowercase for comparison
+        var cleaned1 = word1.Replace(" ", "").ToLower();
+        var cleaned2 = word2.Replace(" ", "").ToLower();
+
+        // If lengths are different, they cannot be anagrams
+        if (cleaned1.Length != cleaned2.Length)
+            return false;
+
+        // Create a dictionary to count the letter characters in first word. (Word1)
+        var charCount = new Dictionary<char, int>();
+        foreach (var c in cleaned1)
+        {
+            if (charCount.ContainsKey(c))
+                charCount[c]++;
+            else
+                charCount[c] = 1;
+        }
+
+        // Check if the 2nd word (word2) has the same characters as seen before in the dictionary.
+        foreach (var c in cleaned2)
+        {
+            if (!charCount.ContainsKey(c))
+                return false;
+
+            charCount[c]--;
+            if (charCount[c] < 0)
+                return false;
+        }
+
+        // All characters matched with correct frequencies
+        return true;
     }
 
     /// <summary>
@@ -96,11 +165,19 @@ public static class SetsAndMaps
 
         var featureCollection = JsonSerializer.Deserialize<FeatureCollection>(json, options);
 
-        // TODO Problem 5:
-        // 1. Add code in FeatureCollection.cs to describe the JSON using classes and properties 
-        // on those classes so that the call to Deserialize above works properly.
-        // 2. Add code below to create a string out each place a earthquake has happened today and its magitude.
-        // 3. Return an array of these string descriptions.
-        return [];
+        // Create a list to store earthquake summaries
+        var earthquakeSummaries = new List<string>();
+
+        // Iterate through each feature and create formatted strings
+        foreach (var feature in featureCollection.Features)
+        {
+            var place = feature.Properties.Place;
+            var magnitude = feature.Properties.Mag;
+            var summary = $"{place} - Mag {magnitude}";
+            earthquakeSummaries.Add(summary);
+        }
+
+        // Return the array of earthquake summaries
+        return earthquakeSummaries.ToArray();
     }
 }
