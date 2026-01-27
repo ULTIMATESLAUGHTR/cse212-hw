@@ -177,7 +177,7 @@ public static class SetsAndMaps
             earthquakeSummaries.Add(summary);
         }
 
-        // Return the array of earthquake summaries
+        // Returns the array of earthquake summaries from each day and location.
         return earthquakeSummaries.ToArray();
     }
 }
