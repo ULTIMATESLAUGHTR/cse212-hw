@@ -239,7 +239,7 @@ public class LinkedList : IEnumerable<int>
         return _head is not null && _tail is not null;
     }
 }
-
+// After a manual test was completed, everything seems to be working fine.
 public static class IntArrayExtensionMethods {
     public static string AsString(this IEnumerable array) {
         return "<IEnumerable>{" + string.Join(", ", array.Cast<int>()) + "}";
