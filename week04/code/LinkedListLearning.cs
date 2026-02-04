@@ -7,6 +7,7 @@ using System.Collections.Generic;
 /// </summary>
 public class LinkedListLearning
 {
+    /*
     public static void Main()
     {
         Console.WriteLine("=== LINKED LIST LEARNING ACTIVITY ===\n");
@@ -47,6 +48,7 @@ public class LinkedListLearning
 
         Console.WriteLine("\n=== LEARNING ACTIVITY COMPLETE ===");
     }
+    */
 
     /// <summary>
     /// Helper method to print the linked list contents
