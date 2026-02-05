@@ -14,8 +14,17 @@ public static class Recursion
     /// </summary>
     public static int SumSquaresRecursive(int n)
     {
-        // TODO Start Problem 1
-        return 0;
+        // Base case: if n is 0 or negative, return 0
+        if (n <= 0)
+        {
+            return 0;
+        }
+        
+        // Recursive case: n^2 + sum of squares for (n-1)
+        return n * n + SumSquaresRecursive(n - 1);
+        // Solution I got to figure this out: I should express the sum as the current number squared plus the sum of all 
+        // smaller squares. For example, sum(5) = 5^2 + sum(4). Each recursive call 
+        // decreases n by 1, moving toward the base case of n <= 0.
     }
 
     /// <summary>
@@ -39,7 +48,29 @@ public static class Recursion
     /// </summary>
     public static void PermutationsChoose(List<string> results, string letters, int size, string word = "")
     {
-        // TODO Start Problem 2
+        // Base case: if we've built a word of the desired size, add it to results
+        if (word.Length == size)
+        {
+            results.Add(word);
+            return;
+        }
+        
+        // Recursive case: try adding each letter to the current word
+        foreach (char letter in letters)
+        {
+            // Create a new string of available letters without the current letter
+            int index = letters.IndexOf(letter);
+            string remaining = letters.Remove(index, 1);
+            
+            // Recursively build permutations with the remaining letters
+            PermutationsChoose(results, remaining, size, word + letter);
+        }
+        
+        // How we solved this: We build permutations one letter at a time. At each step,
+        // we try adding every available letter to our current word, then recursively
+        // fill the rest. When we reach the desired word length, we save it. By removing
+        // each used letter from the available pool, we ensure we don't repeat letters
+        // in a single permutation. The recursion naturally handles all combinations.
     }
 
     /// <summary>
@@ -86,6 +117,12 @@ public static class Recursion
     /// </summary>
     public static decimal CountWaysToClimb(int s, Dictionary<int, decimal>? remember = null)
     {
+        // This will get us the memoization dictionary on the first call
+        if (remember == null)
+        {
+            remember = new Dictionary<int, decimal>();
+        }
+
         // Base Cases
         if (s == 0)
             return 0;
@@ -96,10 +133,18 @@ public static class Recursion
         if (s == 3)
             return 4;
 
-        // TODO Start Problem 3
+        // This will check if we've already calculated this value to avoid redundant recursion.
+        if (remember.ContainsKey(s))
+        {
+            return remember[s];
+        }
 
-        // Solve using recursion
-        decimal ways = CountWaysToClimb(s - 1) + CountWaysToClimb(s - 2) + CountWaysToClimb(s - 3);
+        // Solve using recursion: sum the ways to climb from the three possible previous positions
+        decimal ways = CountWaysToClimb(s - 1, remember) + CountWaysToClimb(s - 2, remember) + CountWaysToClimb(s - 3, remember);
+        
+        // This stores the result in our memoization dictionary so we don't recalculate it later.
+        remember[s] = ways;
+        
         return ways;
     }
 
@@ -118,7 +163,32 @@ public static class Recursion
     /// </summary>
     public static void WildcardBinary(string pattern, List<string> results)
     {
-        // TODO Start Problem 4
+        // The Base case: if there are no more wildcards, we have a complete binary string
+        int wildcardIndex = pattern.IndexOf('*');
+        if (wildcardIndex == -1)
+        {
+            // No wildcards found, add this complete string to results
+            results.Add(pattern);
+            return;
+        }
+        
+        // This is the Recursive case -> replace the first wildcard with both 0 and 1
+        // Splits the pattern into the part before the wildcard and the part after
+        string before = pattern[..wildcardIndex];
+        string after = pattern[(wildcardIndex + 1)..];
+        
+        // Recursively generate all binary strings by replacing the wildcard with 0
+        WildcardBinary(before + "0" + after, results);
+        
+        // Recursively generate all binary strings by replacing the wildcard with 1
+        WildcardBinary(before + "1" + after, results);
+        
+        // How this was solved: We find the first wildcard in the pattern and replace it
+        // with both possible values (0 and 1). By recursively processing each branch,
+        // we generate all combinations. Each recursive call reduces the problem by
+        // replacing one wildcard, until we reach a base case with no wildcards left.
+        // For example, 1**1 becomes 10*1 and 11*1, then 100*1/101*1 and 110*1/111*1,
+        // and finally the four complete strings: 1001, 1011, 1101, 1111.
     }
 
     /// <summary>
