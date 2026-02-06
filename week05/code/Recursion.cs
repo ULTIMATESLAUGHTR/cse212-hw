@@ -177,15 +177,15 @@ public static class Recursion
         string before = pattern[..wildcardIndex];
         string after = pattern[(wildcardIndex + 1)..];
         
-        // Recursively generate all binary strings by replacing the wildcard with 0
+        // Recursively generates all binary strings by replacing the wildcard with 0
         WildcardBinary(before + "0" + after, results);
         
-        // Recursively generate all binary strings by replacing the wildcard with 1
+        // Recursively generates all binary strings by replacing the wildcard with 1
         WildcardBinary(before + "1" + after, results);
         
         // How this was solved: We find the first wildcard in the pattern and replace it
         // with both possible values (0 and 1). By recursively processing each branch,
-        // we generate all combinations. Each recursive call reduces the problem by
+        // that will generate all combinations. Each recursive call reduces the problem by
         // replacing one wildcard, until we reach a base case with no wildcards left.
         // For example, 1**1 becomes 10*1 and 11*1, then 100*1/101*1 and 110*1/111*1,
         // and finally the four complete strings: 1001, 1011, 1101, 1111.
@@ -206,7 +206,7 @@ public static class Recursion
         // currPath.Add((1,2)); // Use this syntax to add to the current path
 
         // TODO Start Problem 5
-        // ADD CODE HERE
+        // ADD CODE HERE (sorry I tried the other maze but I guess I didn't understand that problem.)
 
         // results.Add(currPath.AsString()); // Use this to add your path to the results array keeping track of complete maze solutions when you find the solution.
     }
