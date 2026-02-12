@@ -80,7 +80,14 @@ public class BinarySearchTree : IEnumerable<int>
 
     private void TraverseBackward(Node? node, List<int> values)
     {
-        // TODO Problem 3
+        // TODO Problem 3 - Solving this one. So I set it up to traverse the right subtree first, then add the current node, and finally traverse the left subtree. 
+        // This way, we get the values in reverse order (largest to smallest) like how the TraverseForward method gets values in ascending order.
+        if (node is not null)
+        {
+            TraverseBackward(node.Right, values);  // Traverse right first to get larger values
+            values.Add(node.Data);                  // Add current node
+            TraverseBackward(node.Left, values);   // Traverse left to get smaller values
+        }
     }
 
     /// <summary>

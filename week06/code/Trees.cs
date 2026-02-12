@@ -49,5 +49,28 @@ public static class Trees
     private static void InsertMiddle(int[] sortedNumbers, int first, int last, BinarySearchTree bst)
     {
         // TODO Start Problem 5
+        
+        // Base case: if first > last, there are no values left to insert
+        if (first > last)
+            return;
+        
+        // Find the middle index
+        int middle = (first + last) / 2;
+        
+        // Insert the middle value
+        bst.Insert(sortedNumbers[middle]);
+        
+        // Recursively insert the middle of the left half
+        InsertMiddle(sortedNumbers, first, middle - 1, bst);
+        
+        // Recursively insert the middle of the right half
+        InsertMiddle(sortedNumbers, middle + 1, last, bst);
     }
 }
+
+//Getting to this solution to avoid creating new sub-lists for each recursive call was a bit tricky. 
+//I had to think about how to represent the range of values to consider using indices instead of actual sub-lists. 
+//The base case is when the first index is greater than the last index, which means there are no values left to insert. 
+//Then, I calculate the middle index and insert that value into the BST. 
+//Finally, I make recursive calls to insert the middle of the left half and the middle of the right half using the correct index ranges.
+
