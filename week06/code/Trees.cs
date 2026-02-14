@@ -73,4 +73,4 @@ public static class Trees
 //The base case is when the first index is greater than the last index, which means there are no values left to insert. 
 //Then, I calculate the middle index and insert that value into the BST. 
 //Finally, I make recursive calls to insert the middle of the left half and the middle of the right half using the correct index ranges.
-
+//Concluded some testing and it seems to be working correctly, creating a balanced BST from the sorted list.
